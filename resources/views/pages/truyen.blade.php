@@ -3,11 +3,7 @@
 @include('pages.slide')
 @endsection --}}
 @section('content')
-    <nav class="breadcrumb">
-        <a class="breadcrumb-item" href="#">Home</a>
-        <a class="breadcrumb-item" href="#">Libary</a>
-        <span class="breadcrumb-item active">Data</span>
-    </nav>
+
     <div class="row">
         <div class="col-md-9">
             <div class="row">
@@ -27,7 +23,13 @@
                         <li>Số chapter: 200</li>
                         <li>Số lượt xem: 200</li>
                         <li><a href="#">Xem mục lục</a></li> 
-                        <li><a href="#" class="btn btn-primary">Đọc online</a></li>
+                       
+                        @if ($chapter_dau)
+                        <li><a href="{{ url('xem-chapter/'.$chapter_dau->slug_chapter) }}" class="btn btn-primary">Đọc online</a></li> 
+                        @else
+                        <li><a href="" class="btn btn-danger">Truyện đang được upload</a></li>
+                        @endif
+                       
                     </ul>
                 </div>
 
@@ -38,9 +40,17 @@
             <hr>
             <h4>Mục lục</h4>
             <ul class="mucluctruyen">
+                @php
+                    $mucluc = count($chapter);
+                @endphp
+                @if ($mucluc>0)
                 @foreach ($chapter as $key => $chap)
                 <li><a href="{{ url('xem- chapter/'.$chap->slug_chapter) }}">{{ $chap ->tieude }}</a></li>
                 @endforeach
+                @else
+                <li>Mục lục đang cập nhập....</li>
+                @endif
+                
             </ul>
             <h4>Sách cùng danh mục</h4>
             <div class="row">

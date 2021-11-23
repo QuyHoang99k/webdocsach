@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DanhmucTruyen;
 use App\Models\Truyen;
+use App\Models\Theloai;
 use Illuminate\Http\Request;
 
 class TruyenController extends Controller
@@ -28,8 +29,9 @@ class TruyenController extends Controller
      */
     public function create()
     {
+        $theloai = Theloai::orderBy('id','DESC')->get();
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admin.truyen.create')->with(compact('danhmuc'));
+        return view('admin.truyen.create')->with(compact('danhmuc','theloai'));
 
     }
 
@@ -171,7 +173,7 @@ class TruyenController extends Controller
         $truyen = Truyen::find($id);
         $path = 'public/uploads/truyen/' . $truyen->hinhanh;
         if (file_exists($path)) {
-            unlink($path . $truyen->hinhanh);
+            unlink($path);
         }
         Truyen::find($id)->delete();
         return redirect()->back()->with('status', 'Xóa truyện thành công');

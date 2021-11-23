@@ -77,6 +77,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    
     <script type="text/javascript">
         $('.owl-carousel').owlCarousel({
             loop: true,
@@ -95,6 +96,20 @@
                 }
             }
         })
+    </script>
+    <script type="text/javascript">
+        $('.select-chapter').on('change',function(){
+            var url = $(this).val();
+            if(url){
+                window.location = url;
+            }
+            return false;
+        });
+        curren_chapter();
+        function curren_chapter(){
+            var url = window.location.href;
+            $('.select-chapter').find('option[value="'+url+'"]').attr("selected",true);
+        }
     </script>
 </body>
 

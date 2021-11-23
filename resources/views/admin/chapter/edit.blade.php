@@ -23,37 +23,38 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        <form method="POST" action="{{ route('chapter.update',[$chapter->id]) }}">
+                        <form method="POST" action="{{ route('chapter.update', [$chapter->id]) }}">
                             @method('PUT')
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên chapter</label>
-                                <input onkeyup="ChangeToSlug()" id="slug" type="text" value="{{$chapter ->tieude }}"
+                                <input onkeyup="ChangeToSlug()" id="slug" type="text" value="{{ $chapter->tieude }}"
                                     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                    name="tieude" >
+                                    name="tieude">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Slug chapter</label>
-                                <input type="text" id="convert_slug" value="{{$chapter ->slug_chapter }}"
+                                <input type="text" id="convert_slug" value="{{ $chapter->slug_chapter }}"
                                     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                    name="slug_chapter" >
+                                    name="slug_chapter">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tóm tắt chapter</label>
-                                <input type="text" id="convert_slug" value="{{$chapter ->tomtat }}"
-                                class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                name="tomtat" >
+                                <input type="text" id="convert_slug" value="{{ $chapter->tomtat }}" class="form-control"
+                                    id="exampleInputEmail1" aria-describedby="emailHelp" name="tomtat">
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Nội dung</label>
-                                <textarea class="form-control" name="noidung" id="" cols="30" rows="5" style="resize: none">{{($chapter ->noidung) }}</textarea>
+                                <textarea class="form-control" id="noidung_chapter" name="noidung" id="" cols="30"
+                                    rows="5" style="resize: none">{{ $chapter->noidung }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Thuộc truyện</label>
                                 <select class="custom-select" name="truyen_id" id="">
                                     @foreach ($truyen as $key => $value)
-                                    <option {{($chapter ->truyen_id == $value->id ? 'selected' : '') }} value="{{ $value ->id }}">{{ $value ->tentruyen }}</option>
-                                        
+                                        <option {{ $chapter->truyen_id == $value->id ? 'selected' : '' }}
+                                            value="{{ $value->id }}">{{ $value->tentruyen }}</option>
+
                                     @endforeach
 
                                 </select>
@@ -62,11 +63,11 @@
                                 <label for="exampleInputEmail1">Kích hoạt</label>
                                 <select class="custom-select" name="kichhoat" id="">
                                     @if ($chapter->kichhoat = 0)
-                                    <option selected value="0">Kích hoạt</option>
-                                    <option value="1">Không kích hoạt</option>
+                                        <option selected value="0">Kích hoạt</option>
+                                        <option value="1">Không kích hoạt</option>
                                     @else
-                                    <option value="0">Kích hoạt</option>
-                                    <option selected value="1">Không kích hoạt</option>
+                                        <option value="0">Kích hoạt</option>
+                                        <option selected value="1">Không kích hoạt</option>
                                     @endif
                                 </select>
                             </div>

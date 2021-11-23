@@ -65,7 +65,7 @@ class ChapterController extends Controller
         $chapter->kichhoat = $data['kichhoat'];
         $chapter->truyen_id = $data['truyen_id'];
         $chapter->save();
-        return redirect()->back()->with('status', 'Thêm chapter thành công');
+        return redirect()->route('chapter.index')->with('status', 'Thêm chapter thành công');
     }
 
     /**
