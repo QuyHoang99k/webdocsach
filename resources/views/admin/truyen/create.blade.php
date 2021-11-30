@@ -38,6 +38,18 @@
                                     name="tacgia" >
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Lượt xem</label>
+                                <input type="text" value="{{ old('luotxem') }}"
+                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    name="luotxem" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Từ khóa</label>
+                                <input type="text" value="{{ old('tukhoa') }}"
+                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    name="tukhoa" >
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Slug truyện</label>
                                 <input type="text" id="convert_slug" value="{{ old('slug_truyen') }}"
                                     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -59,7 +71,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Thể loại truyện</label>
-                                <select class="custom-select" name="danhmuc" id="">
+                                <select class="custom-select" name="theloai" id="">
                                     @foreach ($theloai as $key => $the)
                                     <option value="{{ $the ->id }}">{{ $the ->tentheloai }}</option>
                                         
@@ -79,7 +91,14 @@
                                     <option value="1">Không kích hoạt</option>
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Truyện nổi bật/hot</label>
+                                <select class="custom-select" name="truyennoibat" id="">
+                                    <option value="0">Truyện mới</option>
+                                    <option value="1">Truyện nổi bật</option>
+                                    <option value="2">Truyện xem nhiều</option>
+                                </select>
+                            </div>
                             <button type="submit" name="themdanhmuc" class="btn btn-primary">Thêm</button>
                         </form>
 

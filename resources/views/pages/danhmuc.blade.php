@@ -3,7 +3,11 @@
     @include('pages.slide')
 @endsection --}}
 @section('content')
-    <h3>Sách mới cập nhập</h3>
+<nav class="breadcrumb">
+    <a class="breadcrumb-item" href="{{ url('/') }}">Trang chủ</a>
+    <a class="breadcrumb-item" href="">{{ $tendanhmuc }}</a>
+</nav>
+    <h3>{{ $tendanhmuc }}</h3>
     <div class="album py-5 bg-light">
         <div class="container">
             <div class="row">
@@ -44,7 +48,7 @@
                 @endif
 
             </div>
-            <a href="" class="btn btn-success">Xem tất cả</a>
+
         </div>
     </div>
     {{-- sách hay xem nhiều --}}

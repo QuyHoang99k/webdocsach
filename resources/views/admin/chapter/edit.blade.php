@@ -63,11 +63,11 @@
                                 <label for="exampleInputEmail1">Kích hoạt</label>
                                 <select class="custom-select" name="kichhoat" id="">
                                     @if ($chapter->kichhoat = 0)
-                                        <option selected value="0">Kích hoạt</option>
-                                        <option value="1">Không kích hoạt</option>
+                                        <option  value="0">Kích hoạt</option>
+                                        <option  selected value="1">Không kích hoạt</option>
                                     @else
-                                        <option value="0">Kích hoạt</option>
-                                        <option selected value="1">Không kích hoạt</option>
+                                        <option selected value="0">Kích hoạt</option>
+                                        <option  value="1">Không kích hoạt</option>
                                     @endif
                                 </select>
                             </div>

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\DanhmucTruyen;
-use App\Models\Truyen;
 use App\Models\Theloai;
+use App\Models\Truyen;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class TruyenController extends Controller
@@ -16,7 +17,7 @@ class TruyenController extends Controller
      */
     public function index()
     {
-        $list_truyen = Truyen::with('danhmuctruyen')->orderBy('id', 'DESC')->get();
+        $list_truyen = Truyen::with('danhmuctruyen', 'theloai')->orderBy('id', 'DESC')->get();
 
         return view('admin.truyen.index')->with(compact('list_truyen'));
 
@@ -29,9 +30,9 @@ class TruyenController extends Controller
      */
     public function create()
     {
-        $theloai = Theloai::orderBy('id','DESC')->get();
+        $theloai = Theloai::orderBy('id', 'DESC')->get();
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admin.truyen.create')->with(compact('danhmuc','theloai'));
+        return view('admin.truyen.create')->with(compact('danhmuc', 'theloai'));
 
     }
 
@@ -50,8 +51,12 @@ class TruyenController extends Controller
                 'hinhanh' => 'required|image|mimes:jpg,png,jpeg,gì,svg|max:2048|dimensions:min_width=100,min_height=100,max_width = 1000,max_height=1000',
                 'tomtat' => 'required',
                 'tacgia' => 'required',
+                'luotxem' => 'required',
+                'tukhoa' => 'required',
                 'kichhoat' => 'required',
                 'danhmuc' => 'required',
+                'theloai' => 'required',
+                'truyennoibat' => 'required',
             ], [
                 'tentruyen.unique' => 'Tên truyện đã tồn tại',
                 'slug_truyen.required' => 'Slug truyện phải có',
@@ -59,16 +64,24 @@ class TruyenController extends Controller
                 'tomtat.required' => 'Mô tả truyện không được bỏ trống',
                 'tacgia.required' => 'Tác giả truyện không được bỏ trống',
                 'hinhanh.required' => 'Hình ảnh truyện phải có',
+                'theloai.required' => 'Thể loại truyện phải có',
+                'luotxem.required' => 'lượt xem của truyện phải có',
+                'tukhoa.required' => 'từ khóa của truyện phải có',
             ]
         );
 
         $truyen = new Truyen();
         $truyen->tentruyen = $data['tentruyen'];
         $truyen->slug_truyen = $data['slug_truyen'];
+        $truyen->theloai_id = $data['theloai'];
         $truyen->tomtat = $data['tomtat'];
         $truyen->kichhoat = $data['kichhoat'];
         $truyen->tacgia = $data['tacgia'];
+        $truyen->luotxem = $data['luotxem'];
+        $truyen->truyen_noibat = $data['truyennoibat'];
+        $truyen->tukhoa = $data['tukhoa'];
         $truyen->danhmuc_id = $data['danhmuc'];
+        $truyen->created_at = Carbon::now('Asia/Ho_Chi_Minh');
         //thêm ảnh
         $get_image = $request->hinhanh;
         $path = 'public/uploads/truyen/';
@@ -102,9 +115,10 @@ class TruyenController extends Controller
      */
     public function edit($id)
     {
+        $theloai = Theloai::orderBy('id', 'DESC')->get();
         $truyen = Truyen::find($id);
         $danhmuc = DanhmucTruyen::orderBy('id', 'DESC')->get();
-        return view('admin.truyen.edit')->with(compact('truyen', 'danhmuc'));
+        return view('admin.truyen.edit')->with(compact('truyen', 'danhmuc', 'theloai'));
 
     }
 
@@ -125,24 +139,34 @@ class TruyenController extends Controller
 
                     'tomtat' => 'required',
                     'tacgia' => 'required',
+                    'luotxem' => 'required',
+                    'tukhoa' => 'required',
                     'kichhoat' => 'required',
                     'danhmuc' => 'required',
+                    'theloai' => 'required',
+                    'truyennoibat' => 'required',
+
                 ], [
                     'slug_truyen.required' => 'Slug truyện phải có',
                     'tentruyen.required' => 'Tên truyện không được bỏ trống',
                     'tomtat.required' => 'Mô tả truyện không được bỏ trống',
                     'tacgia.required' => 'Tác giả truyện không được bỏ trống',
-
+                    'luotxem.required' => 'lượt xem không được bỏ trống',
                 ]
             );
 
             $truyen = Truyen::find($id);
             $truyen->tentruyen = $data['tentruyen'];
             $truyen->slug_truyen = $data['slug_truyen'];
+            $truyen->theloai_id = $data['theloai'];
             $truyen->tomtat = $data['tomtat'];
             $truyen->tacgia = $data['tacgia'];
+            $truyen->luotxem = $data['luotxem'];
+            $truyen->tukhoa = $data['tukhoa'];
             $truyen->kichhoat = $data['kichhoat'];
             $truyen->danhmuc_id = $data['danhmuc'];
+            $truyen->truyen_noibat = $data['truyennoibat'];
+            $truyen->updated_at = Carbon::now('Asia/Ho_Chi_Minh');
             $get_image = $request->hinhanh;
             if ($get_image) {
                 $path = 'public/uploads/truyen/' . $truyen->hinhanh;
@@ -178,5 +202,11 @@ class TruyenController extends Controller
         Truyen::find($id)->delete();
         return redirect()->back()->with('status', 'Xóa truyện thành công');
 
+    }
+    public function truyennoibat(Request $request){
+        $data = $request->all();
+        $truyen = Truyen::find($data['truyen_id']);
+        $truyen->truyen_noibat = $data['truyennoibat'];
+        $truyen->save();
     }
 }

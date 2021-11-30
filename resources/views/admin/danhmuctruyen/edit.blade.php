@@ -28,28 +28,27 @@
                             @csrf
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên danh mục</label>
-                                <input type="text" value="{{ $danhmuc->tendanhmuc }}" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" name="tendanhmuc" >
+                                <input onkeyup="ChangeToSlug()" id="slug"  type="text" value="{{ $danhmuc->tendanhmuc }}" class="form-control" 
+                                     name="tendanhmuc" >
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Slug danh mục</label>
-                                <input type="text" value="{{ $danhmuc->slug_danhmuc }}" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" name="slug_danhmuc" >
+                                <input id="convert_slug"  type="text" value="{{ $danhmuc->slug_danhmuc }}" class="form-control" 
+                                    name="slug_danhmuc" >
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Mô tả danh mục</label>
-                                <input value="{{ $danhmuc->mota }}" type="text" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" name="mota" >
+                                <input value="{{ $danhmuc->mota }}" type="text" class="form-control" name="mota" >
                             </div>
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Kích hoạt</label>
                                 <select class="custom-select" name="kichhoat" id="">
                                     @if ($danhmuc->kichhoat = 0)
-                                    <option selected value="0">Kích hoạt</option>
-                                    <option value="1">Không kích hoạt</option>
-                                    @else
-                                    <option value="0">Kích hoạt</option>
+                                    <option  value="0">Kích hoạt</option>
                                     <option selected value="1">Không kích hoạt</option>
+                                    @else
+                                    <option selected value="0">Kích hoạt</option>
+                                    <option  value="1">Không kích hoạt</option>
                                     @endif
                                     
                                 </select>

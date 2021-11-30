@@ -102,6 +102,18 @@ address {
   line-height: inherit;
 }
 
+.owl-prev {
+  font-size: 50px !important;
+
+  top: -310% !important;
+  left: -80%;
+}
+.owl-next{
+  font-size: 50px !important;
+  top: -310% !important;
+  left: -80%;
+}
+
 ol,
 ul,
 dl {
@@ -311,6 +323,13 @@ legend {
   line-height: inherit;
   color: inherit;
   white-space: normal;
+}
+ul.dropdown-menu li {
+  padding: 4px 15px;
+}
+ul.dropdown-menu li a {
+text-transform: uppercase;
+color: #000;
 }
 
 progress {
@@ -2986,7 +3005,7 @@ input[type=button].btn-block {
 .dropdown-menu {
   position: absolute;
   top: 100%;
-  left: 0;
+  left: 81%;
   z-index: 1000;
   display: none;
   float: left;

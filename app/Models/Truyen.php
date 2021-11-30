@@ -8,9 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Truyen extends Model
 {
     use HasFactory;
+    protected $dates = [
+        'updated_at',
+        'created_at'
+    ];
     public $timestamps = false;
     protected $fillable = [
-        'tentruyen','tomtat','kichhoat','slug_truyen','danhmuc_id','theloai_id'
+        'tentruyen','tomtat','kichhoat','slug_truyen','danhmuc_id','theloai_id','updated_at','created_at','truyen_noibat'
     ];
     protected $primaryKey = 'id';
     protected $table = 'truyen';
@@ -21,6 +25,6 @@ class Truyen extends Model
         return $this->hasMany('App\Models\Chapter','truyen_id','id');
     } 
     public function theloai(){
-        return $this->belongsTo('App\Models\DanhmucTruyen','danhmuc_id','id');
+        return $this->belongsTo('App\Models\Theloai','theloai_id','id');
     } 
 }

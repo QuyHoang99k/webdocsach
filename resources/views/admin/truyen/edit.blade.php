@@ -40,6 +40,18 @@
                                     name="tacgia" >
                             </div>
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Lượt xem</label>
+                                <input type="text" value="{{ $truyen->luotxem }}"
+                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    name="luotxem" >
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Từ khóa</label>
+                                <input type="text" value="{{ $truyen->tukhoa }}"
+                                    class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                                    name="tukhoa" >
+                            </div>
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Slug truyện</label>
                                 <input type="text" id="convert_slug" value="{{($truyen->slug_truyen) }}"
                                     class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
@@ -55,9 +67,15 @@
                                 <select class="custom-select" name="danhmuc" id="">
                                     @foreach ($danhmuc as $key => $muc)
                                         <option {{ $muc->id==$truyen->danhmuc_id ? 'selected' : '' }} value="{{ $muc->id }}">{{ $muc->tendanhmuc }}</option>
-
                                     @endforeach
-
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Thể loại truyện</label>
+                                <select class="custom-select" name="theloai" id="">
+                                    @foreach ($theloai as $key => $the)
+                                        <option {{ $the->id==$truyen->theloai_id ? 'selected' : '' }} value="{{ $the->id }}">{{ $the->tentheloai }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
@@ -72,15 +90,32 @@
                                 <label for="exampleInputEmail1">Kích hoạt</label>
                                 <select class="custom-select" name="kichhoat" id="">
                                     @if ($truyen->kichhoat = 0)
-                                    <option selected value="0">Kích hoạt</option>
-                                    <option value="1">Không kích hoạt</option>
-                                    @else
-                                    <option value="0">Kích hoạt</option>
+                                    <option  value="0">Kích hoạt</option>
                                     <option selected value="1">Không kích hoạt</option>
+                                    @else
+                                    <option selected value="0">Kích hoạt</option>
+                                    <option  value="1">Không kích hoạt</option>
                                     @endif
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Truyện nổi bật</label>
+                                <select class="custom-select" name="truyennoibat" id="">
+                                    @if ($truyen->truyen_noibat = 0)
+                                    <option selected value="0">Truyện mới</option>
+                                    <option value="1">Truyện nổi bật</option>
+                                    <option value="2">Truyện xem nhiều</option>
+                                    @elseif($truyen->truyen_noibat = 1)
+                                    <option value="0">Truyện mới</option>
+                                    <option selected value="1">Truyện nổi bật</option>
+                                    <option value="2">Truyện xem nhiều</option>
+                                    @else
+                                    <option value="0">Truyện mới</option>
+                                    <option value="1">Truyện nổi bật</option>
+                                    <option selected value="2">Truyện xem nhiều</option>
+                                    @endif
+                                </select>
+                            </div>
                             <button type="submit" name="themdanhmuc" class="btn btn-primary">Cập Nhật</button>
                         </form>
 
